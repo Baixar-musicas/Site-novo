@@ -9,24 +9,13 @@ const SENDPULSE_API_URL = 'https://api.sendpulse.com/smtp/emails';
 const SENDPULSE_API_KEY = 'SEU_API_KEY_AQUI';
 const SENDPULSE_SECRET = 'SEU_SECRET_AQUI';
 
-// Links dos produtos
-const linksDownload = {
-    "Sertanejo": "https://mediafire.com/link-sertanejo",
-    "Rock": "https://mediafire.com/link-rock",
-    "Pop": "https://mediafire.com/link-pop",
-    "Blues": "https://mediafire.com/link-blues",
-    "Reggae": "https://mediafire.com/link-reggae",
-    "MPB": "https://mediafire.com/link-mpb",
-    "Flashback": "https://mediafire.com/link-flashback"
-};
+// Link de download do produto (pode mudar se precisar)
+const linkDownload = "https://pCloud.com/link-do-arquivo";
 
 // Rota para receber webhook da Yampi
 app.post('/webhook-yampi', async (req, res) => {
     try {
-        const { email, product_name } = req.body;
-
-        // Busca o link do produto comprado
-        const linkDownload = linksDownload[product_name] || "https://mediafire.com/default-link";
+        const { email } = req.body;
 
         // Envia o e-mail pelo SendPulse
         await axios.post(SENDPULSE_API_URL, {
